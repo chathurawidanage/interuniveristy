@@ -77,6 +77,8 @@ body{
 
 .score-board-head-title{
     background-color: #ea2e2b;
+    color: #ffffff;
+
 }
 
 .score-board{
@@ -185,3 +187,24 @@ body {
     font-size: 16px;
 }
 /*            #map-canvas { height: 100%; margin: 0; padding: 0;}*/
+
+#mini-scoretable{
+    background-color: rgb(224, 224, 224);
+
+}
+
+#mini-scoretable table{
+    margin-bottom: 0;
+}
+#mini-scoretable tbody{
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+#mini-scoretable tr{
+    background-image: -webkit-linear-gradient(left, rgb(224, 224, 224), rgb(236, 236, 236));
+}
+
+.mini-scoretable-middle{
+    text-align: center;
+}

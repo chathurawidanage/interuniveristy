@@ -8,10 +8,10 @@ Sasith Wathmal Sonnadara
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>University Sports</title>
+    <title>UNIVERSITY SPORTS</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href='http://fonts.googleapis.com/css?family=Oswald|Coda' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans|Oswald|Coda' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="container-fluid">
@@ -59,7 +59,7 @@ Sasith Wathmal Sonnadara
 
     <br>
 
-    <div class="container">
+    <div class="container" ng-app="mspApp" ng-controller="scoreCtrl">
         <div class="row">
             <div class="col-lg-7 col-md-9 col-sm-12 col-xs-12 score-table">
                 <div class="row score-heading">
@@ -109,28 +109,32 @@ Sasith Wathmal Sonnadara
                 </div>
 
             </div>
+            <div class="hidden-lg hidden-md col-sm-12 col-xs-12">
+                <br>
+            </div>
+
 
             <div class="col-md-2 col-lg-4 col-xs-12 pull-right score-board">
                 <div class="row score-board-head">
                     <div class="col-xs-4 score-board-head-title">
-                        <h3>TABLE</h3>
+                        <h3 style="font-size: 18px"><b>TABLE</b></h3>
                     </div>
                     <div class="col-xs-8">
 
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="mini-scoretable">
                     <table class="table">
                         <thead>
                         <tr>
-                            <td width="50">POS</td>
+                            <td width="60" class="mini-scoretable-middle">POS</td>
                             <td>TEAM</td>
-                            <td>P</td>
-                            <td>PTS</td>
+                            <!--<td>P</td>-->
+                            <td width="60" class="mini-scoretable-middle">PTS</td>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <!--<tr>
                             <td>1</td>
                             <td>UOM</td>
                             <td>5</td>
@@ -147,13 +151,25 @@ Sasith Wathmal Sonnadara
                             <td>UOk</td>
                             <td>5</td>
                             <td>300</td>
+                        </tr>-->
+
+                        <tr ng-repeat="x in scores | orderBy:'-score'">
+                            <td class="mini-scoretable-middle">{{$index +1}}</td>
+                            <td>{{x.full_name | uppercase}}</td>
+
+                            <td class="mini-scoretable-middle">{{x.score}}</td>
                         </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
     </div>
+
+
+    <br>
     <!--End of body-->
     <footer class="footer container-fluid">
         <div id="footer-wrapper">
@@ -205,6 +221,17 @@ Sasith Wathmal Sonnadara
     </footer>
 
 </div>
+<script src="js/angular.min.js"></script>
+
+<script>
+    var app = angular.module('mspApp', []);
+    app.controller('scoreCtrl', function($scope, $http) {
+        $http.get("scores.json")
+                .success(function(response) {
+                    $scope.scores = response;
+                });
+    });
+</script>
 
 </body>
 </html>
